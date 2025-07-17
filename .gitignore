@@ -1,5 +1,5 @@
 # Ignore .github folder
-.github/
+# .github/
 
 # Ignore model folder
 model/

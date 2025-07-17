@@ -95,26 +95,28 @@ def prepare_payload(data):
 
     data_processed = []
 
-    data_processed.append(int(data["ram_gb"]))
-    data_processed.append(int(data["ssd"]))
-    data_processed.append(int(data["hdd"]))
-    data_processed.append(int(data["graphic_card"]))
-    data_processed.append(int(data["warranty"]))
-
-    conditions = {
-        "brand": {"asus", "dell", "hp", "lenovo", "other"},
-        "processor_brand": {"amd", "intel", "m1"},
-        "processor_name": {"core i3", "core i5", "core i7", "other", "ryzen 5", "ryzen 7"},
-        "os": {"other", "windows"},
-        "weight": {"casual", "gaming", "thinnlight"},
-        "touchscreen": {"0", "1"},
-        "ram_type": {"ddr4", "other"},
-        "os_bit": {"32", "64"}
-    }
-
-    for key, values in conditions.items():
-        for value in values:
-            data_processed.append(1 if data[key] == value else 0)
+    data_processed.append(int(data["Month"]))
+    data_processed.append(int(data["Age"]))
+    data_processed.append(int(data["Occupation"]))
+    data_processed.append(float(data["Annual_Income"]))
+    data_processed.append(float(data["Monthly_Inhand_Salary"]))
+    data_processed.append(int(data["Num_Bank_Accounts"]))
+    data_processed.append(int(data["Num_Credit_Card"]))
+    data_processed.append(int(data["Interest_Rate"]))
+    data_processed.append(int(data["Num_of_Loan"]))
+    data_processed.append(int(data["Delay_from_due_date"]))
+    data_processed.append(int(data["Num_of_Delayed_Payment"]))
+    data_processed.append(float(data["Changed_Credit_Limit"]))
+    data_processed.append(int(data["Num_Credit_Inquiries"]))
+    data_processed.append(int(data["Credit_Mix"]))
+    data_processed.append(float(data["Outstanding_Debt"]))
+    data_processed.append(float(data["Credit_Utilization_Ratio"]))
+    data_processed.append(int(data["Credit_History_Age"]))
+    data_processed.append(int(data["Payment_of_Min_Amount"]))
+    data_processed.append(float(data["Total_EMI_per_month"]))
+    data_processed.append(float(data["Amount_invested_monthly"]))
+    data_processed.append(int(data["Payment_Behaviour"]))
+    data_processed.append(float(data["Monthly_Balance"]))
 
     return data_processed
 
