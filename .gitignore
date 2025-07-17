@@ -1,4 +1,7 @@
-#Ignore model folder
+# Ignore .github folder
+# .github/
+
+# Ignore model folder
 model/
 
 # Byte-compiled / optimized / DLL files
