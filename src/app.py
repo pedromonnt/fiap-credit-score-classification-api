@@ -96,7 +96,7 @@ def prepare_payload(data):
 
     data_processed.append(int(data["Age"]))
     data_processed.append(float(data["Annual_Income"]))
-    data_processed.append(float(data["Monthly_Inhand_Salary"]))  
+    data_processed.append(float(data["Monthly_Inhand_Salary"]))
     data_processed.append(int(data["Num_Bank_Accounts"]))
     data_processed.append(int(data["Num_Credit_Card"]))
     data_processed.append(int(data["Interest_Rate"]))
@@ -109,38 +109,38 @@ def prepare_payload(data):
     data_processed.append(float(data["Credit_Utilization_Ratio"]))
     data_processed.append(int(data["Credit_History_Age"]))
     data_processed.append(float(data["Total_EMI_per_month"]))
-    data_processed.append(float(data["Amount_invested_monthly"]))   
+    data_processed.append(float(data["Amount_invested_monthly"]))
     data_processed.append(float(data["Monthly_Balance"]))
-    data_processed.append(1) if data["Occupation"] == "Accountant" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Architect" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Desconhecido" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Developer" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Doctor" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Engineer" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Entrepreneur" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Journalist" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Lawyer" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Manager" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Mechanic" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Media_Manager" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Musician" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Scientist" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Teacher" else data_processed.append(0)
-    data_processed.append(1) if data["Occupation"] == "Writer" else data_processed.append(0)
-    data_processed.append(1) if data["Credit_Mix"] == "Bad" else data_processed.append(0)
-    data_processed.append(1) if data["Credit_Mix"] == "Desconhecido" else data_processed.append(0)
-    data_processed.append(1) if data["Credit_Mix"] == "Good" else data_processed.append(0)
-    data_processed.append(1) if data["Credit_Mix"] == "Standard" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_of_Min_Amount"] == "NM" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_of_Min_Amount"] == "No" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_of_Min_Amount"] == "Yes" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_Behaviour"] == "Desconhecido" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_Behaviour"] == "High_spent_Large_value_payments" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_Behaviour"] == "High_spent_Medium_value_payments" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_Behaviour"] == "High_spent_Small_value_payments" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_Behaviour"] == "Low_spent_Large_value_payments" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_Behaviour"] == "Low_spent_Medium_value_payments" else data_processed.append(0)
-    data_processed.append(1) if data["Payment_Behaviour"] == "Low_spent_Small_value_payments" else data_processed.append(0)
+
+    # Listas de valores possíveis para one-hot encoding
+    occupations = [
+        "Accountant", "Architect", "Desconhecido", "Developer", "Doctor",
+        "Engineer", "Entrepreneur", "Journalist", "Lawyer", "Manager",
+        "Mechanic", "Media_Manager", "Musician", "Scientist", "Teacher", "Writer"
+    ]
+    credit_mix_values = ["Bad", "Desconhecido", "Good", "Standard"]
+    payment_min_amount_values = ["NM", "No", "Yes"]
+    payment_behaviour_values = [
+        "Desconhecido", "High_spent_Large_value_payments", "High_spent_Medium_value_payments",
+        "High_spent_Small_value_payments", "Low_spent_Large_value_payments",
+        "Low_spent_Medium_value_payments", "Low_spent_Small_value_payments"
+    ]
+
+    # One-hot encoding para 'Occupation'
+    for occ in occupations:
+        data_processed.append(1 if data["Occupation"] == occ else 0)
+
+    # One-hot encoding para 'Credit_Mix'
+    for mix in credit_mix_values:
+        data_processed.append(1 if data["Credit_Mix"] == mix else 0)
+
+    # One-hot encoding para 'Payment_of_Min_Amount'
+    for pma in payment_min_amount_values:
+        data_processed.append(1 if data["Payment_of_Min_Amount"] == pma else 0)
+
+    # One-hot encoding para 'Payment_Behaviour'
+    for pb in payment_behaviour_values:
+        data_processed.append(1 if data["Payment_Behaviour"] == pb else 0)
 
     return data_processed
 
