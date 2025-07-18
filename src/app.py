@@ -1,6 +1,5 @@
 """
-Função para executar predição de valor de laptop com base nos parâmetros enviados, 
-como modelo, processador, memória etc.
+Função para executar predição de score de crédito com base no histórico do cliente.
 Utiliza modelo que precisa ser baixado do repositório de registro de modelos em toda 
 implantação nova.
 """
@@ -32,7 +31,7 @@ def write_real_data(data, prediction):
 
     file_name = f"{now.strftime('%Y-%m-%d')}_credit_score_classification_data.csv"
 
-    data["price"] = prediction
+    data["credit_score"] = prediction
     data["timestamp"] = now_formatted
     data["model_version"] = model_info["version"]
 
@@ -95,11 +94,9 @@ def prepare_payload(data):
 
     data_processed = []
 
-    data_processed.append(int(data["Month"]))
     data_processed.append(int(data["Age"]))
-    data_processed.append(int(data["Occupation"]))
     data_processed.append(float(data["Annual_Income"]))
-    data_processed.append(float(data["Monthly_Inhand_Salary"]))
+    data_processed.append(float(data["Monthly_Inhand_Salary"]))  
     data_processed.append(int(data["Num_Bank_Accounts"]))
     data_processed.append(int(data["Num_Credit_Card"]))
     data_processed.append(int(data["Interest_Rate"]))
@@ -108,15 +105,42 @@ def prepare_payload(data):
     data_processed.append(int(data["Num_of_Delayed_Payment"]))
     data_processed.append(float(data["Changed_Credit_Limit"]))
     data_processed.append(int(data["Num_Credit_Inquiries"]))
-    data_processed.append(int(data["Credit_Mix"]))
     data_processed.append(float(data["Outstanding_Debt"]))
     data_processed.append(float(data["Credit_Utilization_Ratio"]))
     data_processed.append(int(data["Credit_History_Age"]))
-    data_processed.append(int(data["Payment_of_Min_Amount"]))
     data_processed.append(float(data["Total_EMI_per_month"]))
-    data_processed.append(float(data["Amount_invested_monthly"]))
-    data_processed.append(int(data["Payment_Behaviour"]))
+    data_processed.append(float(data["Amount_invested_monthly"]))   
     data_processed.append(float(data["Monthly_Balance"]))
+    data_processed.append(1) if data["Occupation"] == "Accountant" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Architect" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Desconhecido" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Developer" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Doctor" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Engineer" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Entrepreneur" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Journalist" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Lawyer" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Manager" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Mechanic" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Media_Manager" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Musician" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Scientist" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Teacher" else data_processed.append(0)
+    data_processed.append(1) if data["Occupation"] == "Writer" else data_processed.append(0)
+    data_processed.append(1) if data["Credit_Mix"] == "Bad" else data_processed.append(0)
+    data_processed.append(1) if data["Credit_Mix"] == "Desconhecido" else data_processed.append(0)
+    data_processed.append(1) if data["Credit_Mix"] == "Good" else data_processed.append(0)
+    data_processed.append(1) if data["Credit_Mix"] == "Standard" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_of_Min_Amount"] == "NM" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_of_Min_Amount"] == "No" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_of_Min_Amount"] == "Yes" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_Behaviour"] == "Desconhecido" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_Behaviour"] == "High_spent_Large_value_payments" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_Behaviour"] == "High_spent_Medium_value_payments" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_Behaviour"] == "High_spent_Small_value_payments" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_Behaviour"] == "Low_spent_Large_value_payments" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_Behaviour"] == "Low_spent_Medium_value_payments" else data_processed.append(0)
+    data_processed.append(1) if data["Payment_Behaviour"] == "Low_spent_Small_value_payments" else data_processed.append(0)
 
     return data_processed
 
@@ -129,7 +153,7 @@ def handler(event, context=False):
         context (json): dados adicionais ao contexto (opcional).
 
      Returns:
-        json: Predição de preço.
+        json: Predição de score de crédito.
     """
 
     print(event)
