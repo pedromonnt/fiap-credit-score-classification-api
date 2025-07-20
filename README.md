@@ -28,9 +28,9 @@ Este projeto implementa uma API para predição de score de crédito usando um m
 
 - tests/conftest.py: Configuração para os testes Pytest, ajustando o sys.path para importar módulos do diretório src.
 
-- .github/deploy.yml: Workflow do GitHub Actions para o deployment contínuo da API no AWS Lambda via ECR.
+- .github/workflows/deploy.yml: Workflow do GitHub Actions para o deployment contínuo da API no AWS Lambda via ECR.
 
-- .github/review.yml: Workflow do GitHub Actions para a revisão de Pull Request, incluindo testes e linting.
+- .github/workflows/review.yml: Workflow do GitHub Actions para a revisão de Pull Request, incluindo testes e linting.
 
 # API (Função Lambda)
 
