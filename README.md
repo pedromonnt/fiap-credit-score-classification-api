@@ -54,6 +54,7 @@ A função Lambda (src/app.py) é responsável por:
 
 A API espera um payload JSON com a seguinte estrutura:
 
+```json
 {
   "data": {
     "Age": "40",
@@ -79,9 +80,11 @@ A API espera um payload JSON com a seguinte estrutura:
     "Payment_Behaviour": "High_spent_Large_value_payments"
   }
 }
+```
 
 ## Exemplo de resposta:
 
+```json
 {
   "statusCode": 200,
   "headers": {
@@ -89,3 +92,4 @@ A API espera um payload JSON com a seguinte estrutura:
   },
   "body": "{\"prediction\": <valor_do_score>, \"version\": \"<versao_do_modelo>\"}"
 }
+```
